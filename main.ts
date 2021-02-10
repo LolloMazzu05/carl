@@ -1,5 +1,5 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    Carletti.startEffect(effects.spray, 500)
+    Carletti.startEffect(effects.spray, 1000)
     animation.runImageAnimation(
     Carletti,
     [img`
@@ -108,10 +108,30 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     500,
     false
     )
+    mela = sprites.createProjectileFromSprite(img`
+        . . . . . . . e c 7 . . . . . . 
+        . . . . e e e c 7 7 e e . . . . 
+        . . c e e e e c 7 e 2 2 e e . . 
+        . c e e e e e c 6 e e 2 2 2 e . 
+        . c e e e 2 e c c 2 4 5 4 2 e . 
+        c e e e 2 2 2 2 2 2 4 5 5 2 2 e 
+        c e e 2 2 2 2 2 2 2 2 4 4 2 2 e 
+        c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
+        c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
+        c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
+        c e e 2 2 2 2 2 2 2 2 2 2 4 2 e 
+        . e e e 2 2 2 2 2 2 2 2 2 4 e . 
+        . 2 e e 2 2 2 2 2 2 2 2 4 2 e . 
+        . . 2 e e 2 2 2 2 2 4 4 2 e . . 
+        . . . 2 2 e e 4 4 4 2 e e . . . 
+        . . . . . 2 2 e e e e . . . . . 
+        `, Carletti, -11, -50)
 })
+let Colcone: Sprite = null
 let Carletti: Sprite = null
+let mela: Sprite = null
 game.setDialogTextColor(15)
-let mela = sprites.create(img`
+mela = sprites.create(img`
     . . . . . . . e c 7 . . . . . . 
     . . . . e e e c 7 7 e e . . . . 
     . . c e e e e c 7 e 2 2 e e . . 
@@ -147,6 +167,26 @@ Carletti = sprites.create(img`
     . . . f d d c d d b b d f . . . 
     . . . . f f f f f f f f f . . . 
     `, SpriteKind.Player)
-Carletti.setPosition(0, 112)
+Carletti.setPosition(80, 112)
 controller.moveSprite(Carletti, 100, 0)
 Carletti.setStayInScreen(true)
+game.onUpdateInterval(500, function () {
+    Colcone = sprites.create(img`
+        . . 4 4 4 . . . . 4 4 4 . . . . 
+        . 4 5 5 5 e . . e 5 5 5 4 . . . 
+        4 5 5 5 5 5 e e 5 5 5 5 5 4 . . 
+        4 5 5 4 4 5 5 5 5 4 4 5 5 4 . . 
+        e 5 4 4 5 5 5 5 5 5 4 4 5 e . . 
+        . e e 5 5 5 5 5 5 5 5 e e . . . 
+        . . e 5 f 5 5 5 5 f 5 e . . . . 
+        . . f 5 5 5 4 4 5 5 5 f . . f f 
+        . . f 4 5 5 f f 5 5 6 f . f 5 f 
+        . . . f 6 6 6 6 6 6 4 4 f 5 5 f 
+        . . . f 4 5 5 5 5 5 5 4 4 5 f . 
+        . . . f 5 5 5 5 5 4 5 5 f f . . 
+        . . . f 5 f f f 5 f f 5 f . . . 
+        . . . f f . . f f . . f f . . . 
+        `, SpriteKind.Player)
+    Colcone.setPosition(0, 0)
+    Colcone.setVelocity(50, 50)
+})
